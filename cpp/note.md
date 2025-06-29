@@ -44,4 +44,16 @@
   iv.converts the preprocessed code to object codes and places in a .o or .obj file
   V.The main stage also sometimes considered different than compiling includes ASSEMBLING, which converts the assembly code generated into machine code and the resukt is stored into object files .
 
-  ****
+   **Linking**
+=>Linking is the process of combining multiple object files into a singular executable file .It resolves the
+references to the functions and variables that are defined in other files or libraries.the different types of 
+linking includes dynamic and static linking .
+
+   **pragma once**
+-> Pragma once is a non-standard but widely used preprocessor directive used to ensure that a single header fileis included only once during the compilation process and helps to prevent duplicate definitions which may lead to compilation errors.It is supported by mostly all compilers prominent today but some old ones may not be able to understand it.
+
+```c++
+      #include "../log.h"
+```
+The ../ is a smalll section inside the file name of a preprocessor directive that tells  that the file is located one directory above from the current file directory.
+

@@ -30,4 +30,6 @@ const greet =function(name){
    }
    greet();
    ```
+**Functions that donot have a return type by default return undefined**
+
 
