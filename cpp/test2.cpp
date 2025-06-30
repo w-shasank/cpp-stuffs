@@ -1,14 +1,14 @@
 #include<iostream>
 using namespace std;
 class  converter {
-   int feet;
-   int inches;
+   float feet;
+   float inches;
   public:
-  converter(int meter)
+  converter(float meter)
   {
-    int totalInches=meter *40;
+    float totalInches=meter *39.37;
     feet=totalInches/12;
-    inches=totalInches%12;
+    inches=int(totalInches)%12;
   }
   void display()
   {
@@ -17,7 +17,7 @@ class  converter {
 
 };
 int main() {
-    int meters;
+   float meters;
     cout<<"Enter the distance in meters :"<<endl;
     cin>>meters;
     converter first = meters;
