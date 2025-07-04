@@ -11,7 +11,6 @@ newClass(const newClass &obj)
     x= obj.x;
     y= obj.y;
 }
-
 };
 int main() {
     newClass obj1(10, 20);
