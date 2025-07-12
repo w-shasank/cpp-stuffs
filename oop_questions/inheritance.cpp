@@ -23,8 +23,8 @@ using namespace std;
 
 int main()
 {
-    person c1;
-    c1.showme();
-    c1.cafe();
+    person p;
+    p.cafe();
+    p.showme();
     return 0;
 }
