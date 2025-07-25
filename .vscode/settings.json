@@ -2,5 +2,6 @@
     "files.associations": {
         "iostream": "cpp",
         "iomanip": "cpp"
-    }
+    },
+    "idf.pythonInstallPath": "/usr/bin/python3"
 }
