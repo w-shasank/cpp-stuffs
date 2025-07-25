@@ -30,6 +30,8 @@ public:
 int main()
 {
     base *b = new derived(10,20);
+    base *b3 = new base(20);
     delete b;
+    delete b3;
     return 0;
 }
