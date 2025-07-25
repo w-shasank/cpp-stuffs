@@ -8,7 +8,7 @@ class base{
     {
         cout<<"Base Constructor called";
     }
-    ~base()
+    virtual ~  base()
     {
         cout<<endl<<"Base destructor called";
     }
@@ -20,7 +20,7 @@ public:
    derived(int x,int y):base(x),derivedValue(y){
     cout<<"Derived Constructor Called :";
    }
-   ~derived()
+  ~derived()
    {
     cout<<endl<<"Derived destructor called :";
    }
@@ -30,5 +30,6 @@ public:
 int main()
 {
     base *b = new derived(10,20);
+    delete b;
     return 0;
 }
