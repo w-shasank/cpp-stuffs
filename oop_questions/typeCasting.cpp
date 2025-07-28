@@ -26,5 +26,6 @@ int main()
     int num=56;
     char *b = reinterpret_cast<char*>(num);
     cout<<endl<<static_cast<void *>(b);
+    cout<<"The casting is done and dusted :"
     return 0;
 }
