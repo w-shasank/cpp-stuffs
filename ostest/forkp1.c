@@ -4,6 +4,8 @@
 
 int main(int argc,char *argv[])
 {
+    while(1)
+    {
     printf("Hello world !! (pid : %d)\n",(int)getpid());
     int rc =fork();
     if(rc<0)
@@ -18,6 +20,8 @@ int main(int argc,char *argv[])
     else{
         printf("Hello, I am a parent of %d (pid : %d)\n",(int)getpid(),rc );
     }
+
+}
 
     return 0;
 }
