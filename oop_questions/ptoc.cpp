@@ -1,3 +1,4 @@
+//Conversion from polar form to cartesian cordinates with the conversion routine at the source class
 #include<iostream>
 #include<cmath>
 using namespace std;
