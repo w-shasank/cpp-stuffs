@@ -1,4 +1,5 @@
-*Virtualization*
+# *Virtualization*
+
 The fundamental concept behind virtualization is to make a system's resources—such as the CPU, memory, or disk—appear as though they are exclusively dedicated to a single program. This illusion is supported by several key mechanisms:
 
 **Context Switching:** This is the technique the operating system uses to save the state of one process and restore the state of another, enabling the CPU to switch between processes.
@@ -7,7 +8,10 @@ The fundamental concept behind virtualization is to make a system's resources—
 
 **Scheduling Policies:** These are the strategies and algorithms the OS uses to determine which process runs next and how long it gets to execute.
 
-*How a Program Becomes a Process*
+---
+
+# *How a Program Becomes a Process*
+
 When a user launches a program—either through a graphical interface or a command-line terminal—the operating system takes charge of creating a corresponding process by following these steps:
 
 **Initial Setup:** The OS assigns a unique process ID (PID), sets the initial process state (typically "new" or "ready"), and determines a priority level. This data is stored in a structure called the Process Control Block (PCB).
@@ -20,7 +24,10 @@ When a user launches a program—either through a graphical interface or a comma
 
 **Scheduling and Execution:** The process is added to the scheduler’s queue and will be selected to run based on the OS’s scheduling policy. Once selected, the process begins execution on the CPU.
 
-*Process States*
+---
+
+# *Process States*
+
 A process can be in one of several states at any given time:
 
 **Running**: The process is currently executing instructions on the CPU.
@@ -29,11 +36,12 @@ A process can be in one of several states at any given time:
 
 **Blocked**: The process is waiting for an external event (such as disk I/O or a network packet) and cannot proceed. Once the event is complete, the process returns to the ready state and waits to be scheduled again.
 
-*Key Data Structures*
+---
+
+# *Key Data Structures*
+
 To manage all active processes, the OS relies on critical data structures:
 
-It maintains a ready list containing all processes that are eligible to run.
-
-It keeps track of the currently running process.
-
-It also monitors blocked processes, ensuring that when the required event completes, the appropriate process is returned to the ready queue.
+- It maintains a ready list containing all processes that are eligible to run.
+- It keeps track of the currently running process.
+- It also monitors blocked processes, ensuring that when the required event completes, the appropriate process is returned to the ready queue.
