@@ -1,2 +1,0 @@
-**Introduction to DOM**
-  Javascrit is the de facto programming language of the web although, it itself doesnt have the ability or built in method to work with graphics display and sounds. It is the web browser that provides an API(Application programming interface ) for accessing the HTMl and CSS files in a tree like structure known as the Document object model (DOM). The combination of javascript and DOM is what together allows us to create interactive and Dynamic websites.
