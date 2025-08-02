@@ -45,3 +45,38 @@ To manage all active processes, the OS relies on critical data structures:
 - It maintains a ready list containing all processes that are eligible to run.
 - It keeps track of the currently running process.
 - It also monitors blocked processes, ensuring that when the required event completes, the appropriate process is returned to the ready queue.
+
+#  Process API
+
+The Process API is a set of operating system functions that allow a program to create, manage, and interact with processes.
+The major system cals includes the likes  `fork()`, `exec()`, and `wait()` system calls.
+
+---
+
+- These system calls are **crucial** for creating and managing processes.
+- They help understand how operating systems support **multiprogramming**.
+- Used widely in real applications and interviews.
+
+
+They are the API's that ,Operating systems offer **simple yet powerful** interfaces for:
+- Creating a new process
+- Replacing a process with a new program
+- Waiting for a process to finish
+
+# Process API Functions
+
+## 1. `fork()` – Create a New Process
+
+**Definition:**  
+fork() creates a new process by duplicating the current one.
+
+**Behavior:**
+- The process that calls fork() is the **parent**.
+- It creates a **child** process — an almost identical copy.
+- Both continue from the point where fork() routine iss called.
+
+**Return Value:**
+- **Parent gets:** PID of the child
+- **Child gets:** 0
+- **On error:** -1 is returned
+
