@@ -1,7 +1,8 @@
 {
     "files.associations": {
         "iostream": "cpp",
-        "iomanip": "cpp"
+        "iomanip": "cpp",
+        "stdio.h": "c"
     },
     "idf.pythonInstallPath": "/usr/bin/python3"
 }
