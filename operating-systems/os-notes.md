@@ -1,4 +1,4 @@
-# *Virtualization*
+# _Virtualization_
 
 The fundamental concept behind virtualization is to make a system's resources—such as the CPU, memory, or disk—appear as though they are exclusively dedicated to a single program. This illusion is supported by several key mechanisms:
 
@@ -10,7 +10,7 @@ The fundamental concept behind virtualization is to make a system's resources—
 
 ---
 
-# *How a Program Becomes a Process*
+# _How a Program Becomes a Process_
 
 When a user launches a program—either through a graphical interface or a command-line terminal—the operating system takes charge of creating a corresponding process by following these steps:
 
@@ -26,7 +26,7 @@ When a user launches a program—either through a graphical interface or a comma
 
 ---
 
-# *Process States*
+# _Process States_
 
 A process can be in one of several states at any given time:
 
@@ -38,7 +38,7 @@ A process can be in one of several states at any given time:
 
 ---
 
-# *Key Data Structures*
+# _Key Data Structures_
 
 To manage all active processes, the OS relies on critical data structures:
 
@@ -46,10 +46,10 @@ To manage all active processes, the OS relies on critical data structures:
 - It keeps track of the currently running process.
 - It also monitors blocked processes, ensuring that when the required event completes, the appropriate process is returned to the ready queue.
 
-#  Process API
+# Process API
 
 The Process API is a set of operating system functions that allow a program to create, manage, and interact with processes.
-The major system cals includes the likes  `fork()`, `exec()`, and `wait()` system calls.
+The major system cals includes the likes `fork()`, `exec()`, and `wait()` system calls.
 
 ---
 
@@ -57,8 +57,8 @@ The major system cals includes the likes  `fork()`, `exec()`, and `wait()` syste
 - They help understand how operating systems support **multiprogramming**.
 - Used widely in real applications and interviews.
 
-
 They are the API's that ,Operating systems offer **simple yet powerful** interfaces for:
+
 - Creating a new process
 - Replacing a process with a new program
 - Waiting for a process to finish
@@ -71,12 +71,96 @@ They are the API's that ,Operating systems offer **simple yet powerful** interfa
 fork() creates a new process by duplicating the current one.
 
 **Behavior:**
+
 - The process that calls fork() is the **parent**.
 - It creates a **child** process — an almost identical copy.
 - Both continue from the point where fork() routine iss called.
 
 **Return Value:**
+
 - **Parent gets:** PID of the child
 - **Child gets:** 0
 - **On error:** -1 is returned
 
+After a `fork()` system call , both the parent and child processes begin executing from the same point, but the order in which they run is not guaranteed. This behavior is called non-determinism. It arises because the operating system’s**CPU scheduler** decides which process runs first, and this decision can vary each time the program is executed. As a result, outputs from the same program can appear in different orders depending on the scheduling.This problem/abnormality are often solved using synchronization tools like `wait()` to manage execution order.
+
+- After a process calls `fork()`, both the parent and child processes can access the same file descriptor.
+- The file descriptor refers to the same open file description, so they share the same file offset and status flags.
+- If both processes write to the file at the same time, the output may be interleaved or corrupted due to race conditions.
+- A file descriptor is a non-negative integer used to represent an open file or I/O resource in Unix-like systems.
+
+# Limited Direct Execution (LDE)
+
+## What is Limited Direct Execution?
+
+- LDE is a technique where user programs run **directly** on the CPU to maximize efficiency.
+- The CPU runs user code **in a restricted mode**, limiting what the program can do without OS intervention.
+- This approach balances **performance** (direct execution) and **safety/security** (limited privileges).
+
+## Why is LDE needed?
+
+- Running user programs directly is fast but risky.
+- Without restrictions, user code could crash the system or access hardware illegally.
+- The OS must regain control regularly to manage resources and maintain fairness.
+
+## Challenges with LDE
+
+1. **Restricted operations by user code:**  
+   User programs might try to perform unsafe or privileged operations.
+2. **Regaining OS control:**  
+   After handing control to user code, the OS must have a way to take it back.
+
+## Approaches to Regaining Control
+
+- **Cooperative approach:**  
+  User programs voluntarily give control back (e.g., via system calls).  
+  _Risk:_ Malicious or buggy programs might never yield control.
+- **Non-cooperative approach:**  
+  The OS _forces_ control back using hardware mechanisms like **timer interrupts** and **traps**.  
+  _This is the common and safer approach._
+
+## How Non-Cooperative Control Regain Works
+
+- The OS sets a timer interrupt for each process’s CPU time slice.
+- When the timer fires, the CPU interrupts the user process and switches to kernel mode.
+- The OS saves the current process state.
+- The scheduler decides which process to run next.
+- The OS restores the chosen process’s state and resumes execution.
+
+## Handling Concurrency
+
+- Timer interrupts enable **concurrent execution** by switching between multiple processes.
+- The OS uses synchronization tools like **locks**, **semaphores**, and **atomic operations** to avoid race conditions and ensure safe access to shared resources.
+
+## Summary
+
+- LDE provides a way to run user programs efficiently while enforcing restrictions.
+- OS uses hardware support (restricted mode, traps, interrupts) to maintain control.
+- Scheduler manages which process runs at any time.
+
+---
+# Context Switch
+
+## What is a Context Switch?
+- A context switch is the process where the CPU switches from running one process to another.
+- It involves saving the state of the currently running process and loading the state of the next process to run.
+
+## Why is it needed?
+- Enables multitasking by allowing multiple processes to share the CPU.
+- Ensures the OS can regain control and switch between processes efficiently.
+
+## Steps in a Context Switch
+1. **Save the current process state:**  
+   - CPU registers, program counter, stack pointer, and other CPU state information are saved to the process control block (PCB).
+2. **Update process state:**  
+   - Mark the current process as ready, waiting, or another appropriate state.
+3. **Select the next process:**  
+   - The scheduler chooses the next process to run.
+4. **Load the next process state:**  
+   - CPU registers and other state information for the next process are loaded from its PCB.
+5. **Resume execution:**  
+   - CPU begins executing the new process from where it left off.
+
+## Note
+- Context switches have overhead because saving and loading states takes time.
+- Efficient scheduling aims to minimize unnecessary context switches.

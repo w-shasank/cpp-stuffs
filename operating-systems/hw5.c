@@ -35,7 +35,7 @@ int main()
  
 
 //for wait() in the child process 
-//The parent :Wait returned the given value -1Child 
+//The parent :Wait returned the given value -1 Child 
 
-//wait() returned -1 when it is called in the child process because the child process dont have any child to wait for their termination
+//wait() returned -1 when it is called in the child process because the child process dont have any child to wait for their termination and is immediately terminated
 //returns the pid of the child when called at the parent process
