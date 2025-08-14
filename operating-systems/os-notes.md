@@ -164,3 +164,81 @@ After a `fork()` system call , both the parent and child processes begin executi
 ## Note
 - Context switches have overhead because saving and loading states takes time.
 - Efficient scheduling aims to minimize unnecessary context switches.
+
+
+# OS Scheduling Algorithms Notes
+
+## 1. Key Concepts
+- **Arrival Time**: The time when a process is created, not when it starts execution.
+- **Turnaround Time**: `T_turnaround = T_completion - T_arrival`. Measures total time a job spends in the system.
+- **Response Time**: Time from submission to the first execution.
+- **Fairness**: How evenly CPU resources are distributed among processes.
+
+---
+
+## 2. First-Come, First-Served (FCFS / FIFO)
+- Jobs are executed in order of arrival.
+- **Non-preemptive**.
+- **Pros**: Simple to implement.
+- **Cons**: Poor fairness; long jobs can block short jobs (convoy effect).
+
+---
+
+## 3. Shortest Job First (SJF) / Shortest Time to Completion First (STCF)
+- **SJF**: Selects the job with the shortest total execution time.
+- **STCF**: Preemptive version of SJF; the currently running job can be preempted if a shorter job arrives.
+- **Pros**: Minimizes average turnaround time.
+- **Cons**: Requires prior knowledge of job lengths; may starve long jobs.
+- **Response Time**: May not be optimal.
+
+---
+
+## 4. Round Robin (RR)
+- Each process gets a **time slice (quantum)**.
+- **Preemptive**: process is moved to the end of the queue after its time slice expires.
+- **Pros**: Fairer than FIFO for CPU-bound jobs.
+- **Cons**: Larger context switching overhead; time slice choice affects performance.
+
+---
+
+## 5. Multi-Level Feedback Queue (MLFQ)
+- Multiple priority queues; jobs move between queues based on behavior.
+- **Rules**:
+  1. Higher priority jobs run first.
+  2. Equal priority: round-robin.
+  3. New job enters topmost queue.
+  4. If job uses up allotment → priority reduced.
+  5. After some period, all jobs moved back to topmost queue.
+- **Pros**: Approximates SJF for short jobs; fair to long CPU-bound jobs.
+- **Cons**: More complex; requires tuning of time slices and queue parameters.
+
+---
+
+## 6. Proportional Share Scheduling
+- CPU is divided among processes **proportional to their allocated shares**.
+- **Lottery Scheduling**:
+  - Processes have tickets; randomly pick a ticket to choose next process.
+  - Probabilistic; starvation possible if one process holds most tickets.
+
+---
+
+## 7. Linux Completely Fair Scheduler (CFS)
+- Implements **fair-share scheduling** efficiently.
+- Uses **virtual runtime (vruntime)**:
+  - Each process accumulates vruntime while running.
+  - Scheduler picks process with **lowest vruntime** next.
+- **Time slice**:
+  - Calculated as `sched_latency / n_processes`.
+  - Minimum granularity prevents too small slices.
+- **Red-Black Tree**:
+  - Processes organized by vruntime.
+  - Efficient insert, delete, and finding process with lowest vruntime.
+
+---
+
+## 8. General Observations
+- **Trade-offs** exist between metrics: performance, fairness, and response time.
+- **Preemption** improves responsiveness but may increase context switching.
+- **Workload assumptions** (like job length or I/O behavior) heavily influence the optimal scheduler choice.
+
+
