@@ -1,3 +1,0 @@
-/home/shashank/projects/github-projects/cpp-examples/cpp/build/CMakeFiles/atm.dir
-/home/shashank/projects/github-projects/cpp-examples/cpp/build/CMakeFiles/edit_cache.dir
-/home/shashank/projects/github-projects/cpp-examples/cpp/build/CMakeFiles/rebuild_cache.dir
