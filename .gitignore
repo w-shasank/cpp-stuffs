@@ -1,1 +1,9 @@
 .vscode
+# CMake (inside src/)
+src/CMakeLists.txt
+
+# Build artifacts
+src/build/
+
+# Headers (if generated)
+src/include/
